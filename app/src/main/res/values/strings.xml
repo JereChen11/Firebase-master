@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Firebase-master</string>
+    <string name="count_event">count button click event</string>
 </resources>
