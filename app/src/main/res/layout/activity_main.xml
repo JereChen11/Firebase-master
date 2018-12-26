@@ -6,26 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/count_event"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/left_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="left"/>
+        android:text="@string/left_string"/>
 
     <Button
         android:id="@+id/center_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="center"
+        android:text="@string/center_string"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -33,15 +24,33 @@
         android:id="@+id/right_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="right"
+        android:text="@string/right_string"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="next"
+        android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:gravity="center_horizontal"
+        android:text="@string/crash_button_introduce"
+        app:layout_constraintBottom_toTopOf="@+id/crash_button"/>
+
+    <Button
+        android:id="@+id/crash_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/crash_button"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </android.support.constraint.ConstraintLayout>

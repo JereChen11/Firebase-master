@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 /**
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button centerButton;
     private Button rightButton;
     private Button nextButton;
+    private Button crashButton;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         centerButton = findViewById(R.id.center_button);
         rightButton = findViewById(R.id.right_button);
         nextButton = findViewById(R.id.next_button);
+        crashButton = findViewById(R.id.crash_button);
     }
 
     private void clickEvent() {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         centerButton.setOnClickListener(this);
         rightButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
+        crashButton.setOnClickListener(this);
     }
 
 
@@ -71,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.next_button:
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.crash_button:
+                Toast.makeText(this, "Force a crash", Toast.LENGTH_SHORT).show();
+                Crashlytics.getInstance().crash(); // Force a crash
                 break;
             default:
                 break;
