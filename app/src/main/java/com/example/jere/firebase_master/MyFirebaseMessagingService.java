@@ -24,8 +24,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onNewToken(s);
         Log.d(TAG, "onNewToken: " + s);
 
-        String token = FirebaseInstanceId.getInstance().getToken();
-        storeToken(token);
+        // Store device Token.
+        storeToken(s);
     }
 
     @Override
@@ -37,7 +37,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             //handle the data message here
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
 
             //getting the title and the body
             String title = remoteMessage.getNotification().getTitle();

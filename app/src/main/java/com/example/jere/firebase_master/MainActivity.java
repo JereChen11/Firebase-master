@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 /**
@@ -32,27 +34,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        FirebaseInstanceId.getInstance().getInstanceId();
-//        FirebaseInstanceId.getInstance().getToken();
+        // acquire device token
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String deviceToken = instanceIdResult.getToken();
+                Log.d("deviceToken", "onCreate: " + deviceToken);
+                // Do whatever you want with your token now
+                // i.e. store it on SharedPreferences or DB
+                // or directly send it to server
+            }
+        });
 
         findViewId();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         clickEvent();
-
-//        FirebaseMessaging.getInstance().subscribeToTopic("news")
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        String msg = getString(R.string.msg_subscribed);
-//                        if (!task.isSuccessful()) {
-//                            msg = getString(R.string.msg_subscribe_failed);
-//                        }
-//                        Log.d("msg: ", msg);
-//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
-
     }
 
     @Override
