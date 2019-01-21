@@ -14,14 +14,14 @@ import com.google.firebase.analytics.FirebaseAnalytics;
  */
 public class SecondActivity extends AppCompatActivity {
 
-    private FirebaseAnalytics mFirebaseAnalytics;
+//    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+//        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         Button nextButton = findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mFirebaseAnalytics.setCurrentScreen(this, "SecondActivity", null );
+//        mFirebaseAnalytics.setCurrentScreen(this, "fcm_SecondActivity", null );
         Log.d("Track Screens", "onResume: " + "SecondActivity");
     }
 }
