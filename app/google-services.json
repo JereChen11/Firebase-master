@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "448386238255",
-    "firebase_url": "https://fir-master-9ba63.firebaseio.com",
-    "project_id": "fir-master-9ba63",
-    "storage_bucket": "fir-master-9ba63.appspot.com"
+    "project_number": "931946580214",
+    "firebase_url": "https://ga-coexit-fcm.firebaseio.com",
+    "project_id": "ga-coexit-fcm",
+    "storage_bucket": "ga-coexit-fcm.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:448386238255:android:b194021ad69a2561",
+        "mobilesdk_app_id": "1:931946580214:android:b194021ad69a2561",
         "android_client_info": {
           "package_name": "com.example.jere.firebase_master"
         }
       },
       "oauth_client": [
         {
-          "client_id": "448386238255-krson6b9fo6prl3o36fm56k6rdhd9a8o.apps.googleusercontent.com",
+          "client_id": "931946580214-g3jv7ugil19eh29ndt561upfb72esan1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCVDICLlO3vrRqbJTqrw3bOTQxjyQMSzR4"
+          "current_key": "AIzaSyBzW1uhDggeoeJn1ZOFMX8d9cxgWmmXpoY"
         }
       ],
       "services": {

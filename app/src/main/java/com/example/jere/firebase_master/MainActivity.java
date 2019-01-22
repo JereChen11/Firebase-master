@@ -2,7 +2,6 @@ package com.example.jere.firebase_master;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +12,9 @@ import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 /**
  * @author jere
@@ -30,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button rightButton;
     private Button nextButton;
     private Button crashButton;
-//    private FirebaseAnalytics mFirebaseAnalytics;
     private static Tracker mTracker;
 
     @Override
@@ -41,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         GoogleAnalytics analytics = GoogleAnalytics.getInstance(getApplication());
         Log.d("AnalyticLogger", "trackingId: " + "UA-132877157-1");
         mTracker = analytics.newTracker("UA-132877157-1");
+
+        mTracker.setScreenName("gcm-MainActivity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         // acquire device token
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
@@ -55,18 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         findViewId();
-//        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         clickEvent();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mFirebaseAnalytics.setCurrentScreen(this, "fcm_MainActivity", null );
         Log.d("Track Screens", "onResume: " + "MainActivity");
-
-//        mTracker.setScreenName("MainActivity-screen-gcm");
-//        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
     }
 
@@ -94,17 +86,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()) {
             case R.id.left_button:
                 Toast.makeText(this, "left_button", Toast.LENGTH_SHORT).show();
-//                mFirebaseAnalytics.logEvent("fcm_left_button", bundle);
                 name = "left_button";
                 break;
             case R.id.center_button:
                 Toast.makeText(this, "center_button", Toast.LENGTH_SHORT).show();
-//                mFirebaseAnalytics.logEvent("fcm_center_button", bundle);
                 name = "center_button";
                 break;
             case R.id.right_button:
                 Toast.makeText(this, "right_button", Toast.LENGTH_SHORT).show();
-//                mFirebaseAnalytics.logEvent("fcm_right_button", bundle);
                 name = "right_button";
                 break;
             case R.id.next_button:
@@ -121,8 +110,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         mTracker.send(new HitBuilders.EventBuilder()
-                .setCategory(name)
+                .setCategory("click-event")
                 .setAction("gcm-event-" + name)
+                .setLabel(name)
                 .build());
         Log.d("gcm_analytic", "onClick: " + name);
     }

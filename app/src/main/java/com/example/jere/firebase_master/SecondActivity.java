@@ -7,21 +7,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * @author jere
  */
 public class SecondActivity extends AppCompatActivity {
 
-//    private FirebaseAnalytics mFirebaseAnalytics;
+    private Tracker mTracker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
-//        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        GoogleAnalytics analytics = GoogleAnalytics.getInstance(getApplication());
+        Log.d("AnalyticLogger", "trackingId: " + "UA-132877157-1");
+        mTracker = analytics.newTracker("UA-132877157-1");
+
+        mTracker.setScreenName("gcm-SecondActivity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
         Button nextButton = findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -32,13 +39,11 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mFirebaseAnalytics.setCurrentScreen(this, "fcm_SecondActivity", null );
         Log.d("Track Screens", "onResume: " + "SecondActivity");
     }
 }
