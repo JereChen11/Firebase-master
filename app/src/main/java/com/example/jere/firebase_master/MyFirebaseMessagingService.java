@@ -1,7 +1,5 @@
 package com.example.jere.firebase_master;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -20,7 +18,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "onNewToken: " + s);
 
         // Store device Token.
-        storeToken(s);
+        MyFirebaseUtils.storeDeviceToken(this, s);
     }
 
     @Override
@@ -39,13 +37,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         }
 
+        //todo need refactor: app run on foreground need push notification when receive notification
+//        Notification notification = new NotificationCompat.Builder(this)
+//                .setContentTitle(remoteMessage.getNotification().getTitle())
+//                .setContentText(remoteMessage.getNotification().getBody())
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setSmallIcon(R.mipmap.ic_launcher)
+//                .setWhen(System.currentTimeMillis())
+//                .build();
+//
+//        NotificationManagerCompat manager = NotificationManagerCompat.from(this);
+//        manager.notify(111223344, notification);
+
     }
 
-    public void storeToken(String token) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("token", token);
-        editor.apply();
-    }
 
 }

@@ -1,7 +1,10 @@
 package com.example.jere.firebase_master;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+
 
 /**
  * @author jere
@@ -30,17 +34,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // acquire device token
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
-            @Override
-            public void onSuccess(InstanceIdResult instanceIdResult) {
-                String deviceToken = instanceIdResult.getToken();
-                Log.d("deviceToken", "onCreate: " + deviceToken);
-                // Do whatever you want with your token now
-                // i.e. store it on SharedPreferences or DB
-                // or directly send it to server
-            }
-        });
+        if (MyFirebaseUtils.getDeviceToken(this) == null) {
+            // Actively get Firebase device token.
+            FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(new OnSuccessListener<InstanceIdResult>() {
+                @Override
+                public void onSuccess(InstanceIdResult instanceIdResult) {
+                    String deviceToken = instanceIdResult.getToken();
+                    Log.d("deviceToken", "onCreate: " + deviceToken);
+                    MyFirebaseUtils.storeDeviceToken(getApplicationContext(), deviceToken);
+                }
+            });
+        }
 
         findViewId();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
